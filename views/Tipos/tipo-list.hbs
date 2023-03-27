@@ -1,0 +1,46 @@
+<section class="py-5 text-center container">
+	<div class="row py-lg-5">
+		<div class="col-lg-6 col-md-8 mx-auto">
+			<h1 class="fw-light">Crear Tipos</h1>
+			<p class="lead text-muted">Una aplicacion hecha para crear Tipos.</p>
+			<p>
+				<a href="/Tipos/create-tipo" class="btn btn-secondary my-2">Crear un nuevo Tipo</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+{{#if hasTipo}}
+<div class="album ">
+	<div class="container">
+		<div class="row">
+			<div class="row">
+
+				{{#each tipo as |tipoke|}}
+				<div class="col-md-4 mt-5">
+					<div class="card bg-success text-light">
+
+						<div class="card-body">
+							<h4 class="card-title">{{tipoke.name}}</h4>
+						</div>
+						<hr>
+						<form id="form-delete3" class="form-inline" action="/Tipos/delete-tipo" method="post">
+							<a href="/Tipos/edit-tipo/{{tipoke.id}}?edit=true"
+								class="btn btn-primary p-3 m-3">Editar</a>
+							<input type="hidden" name="Id" value="{{tipoke.id}}" />
+							<button class="btn btn-outline-warning p-3 m-3 delete-tipo">Eliminar</button>
+						</form>
+
+
+
+					</div>
+
+				</div>
+				{{/each}}
+				{{else}}
+				<h1>No hay Tipos</h1>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>

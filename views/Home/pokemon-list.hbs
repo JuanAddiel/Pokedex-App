@@ -1,0 +1,62 @@
+<section class="py-5 text-center container">
+	<div class="row py-lg-5">
+		<div class="col-lg-6 col-md-8 mx-auto">
+			<h1 class="fw-light">Pokemon App</h1>
+			<p class="lead text-muted">Puedes hacer busquedas de Pokemones.</p>
+		
+			<form method="POST" class=" d-inline-flex " action="/list">
+				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="Name">
+				<button class=" btn btn-info" type="submit">Buscar</button>
+			</form>
+
+			{{#if hasRegion}}
+
+			<form method="POST" class="d-inline-flex " action="/region">
+				<select class="form-select me-2" id="region" name="Region">
+					<option>Seleccione una opcion</option>
+
+					{{#each region}}
+					<option value="{{this.id}}">{{this.name}}</option>
+					{{/each}}
+
+				</select>
+
+
+				<button class=" btn btn-info" type="submit">Buscar</button>
+
+			</form>
+
+		</div>
+		{{/if}}
+	</div>
+
+</section>
+
+
+{{#if hasPokemon}}
+<div class="album">
+	<div class="container">
+		<div class="row">
+			{{#each poke as |pok|}}
+			<div class="col-md-4 mt-5">
+				<div class="card bg-success text-light">
+
+					<div class="card-body">
+
+						<h4 class="card-title">{{pok.name}}</h4>
+						<img src="{{pok.image}}" class="card-img-top" alt="{{pok.name}}">
+						<h5 class="card-title">Tipo: {{pok.Tipo.dataValues.name}}</h5>
+						<h5 class="card-title">Region: {{pok.Regione.dataValues.name}}</h5>
+					</div>
+				</div>
+
+			</div>
+			{{/each}}
+			
+		</div>
+
+	</div>
+	{{else}}
+			<h1>No hay pokemones</h1>
+			{{/if}}
+</div>

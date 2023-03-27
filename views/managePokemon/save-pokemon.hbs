@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+
+            {{#if (and hasTipo hasRegion)}}
+
+            <div class="card-header bg-dark text-white">
+                {{#if editMode}}Edicion{{else}}Creacion{{/if}} de Pokemones
+            </div>
+            <div class="card-body card-gris ">
+                <form method="POST"
+                    action="{{#if editMode}}/managePokemon/edit-pokemon{{else}}/managePokemon/create-pokemon{{/if}}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label text-white">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="Name"
+                            value="{{#if editMode}}{{poke.name}}{{/if}}" required />
+
+                        <label for="imagen" class="form-label text-white">Imagen</label>
+                        <input type="text" class="form-control" id="imagen" name="Imagen"
+                            value="{{#if editMode}}{{poke.image}}{{/if}}" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipo" class="form-label text-white">Tipo: </label>
+                        <select class="form-select" id="tipo" name="Tipo" required>
+                            <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+
+                            {{#each tipo as |ti|}}
+
+                            {{#if (equalValue ti.id ../poke.TipoId)}}
+                            <option selected value="{{ti.id}}">{{ti.name}}</option>
+                            {{else}}
+                            <option value="{{ti.id}}">{{ti.name}}</option>
+                            {{/if}}
+
+                            {{/each}}
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="region" class="form-label text-white">Region: </label>
+                        <select class="form-select" id="region" name="Region" required>
+                            <option value="" {{#if editMode}}{{else}}selected{{/if}}>Seleccione una opcion</option>
+
+                            {{#each region as |reg|}}
+
+                            {{#if (equalValue reg.id ../poke.RegioneId )}}
+                            <option selected value="{{reg.id}}">{{reg.name}}</option>
+                            {{else}}
+                            <option value="{{reg.id}}">{{reg.name}}</option>
+                            {{/if}}
+
+                            {{/each}}
+
+                        </select>
+                    </div>
+
+                    {{#if editMode}}
+
+                    <input type="hidden" name="pokemonId" value="{{poke.id}}">
+
+                    {{/if}}
+                    <a href="/managePokemon" class="btn btn-danger">Atras</a>
+                    <button id="enviar" type="submit" class="btn btn-primary">{{#if
+                        editMode}}Editar{{else}}Crear{{/if}}</button>
+                </form>
+             
+            </div>
+        </div>
+
+    </div>
+</div>
+   {{else}}
+                <h1 class="card-header bg-dark text-white">No hay Regiones ni tipo</h1>
+                {{/if}}

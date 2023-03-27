@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-gris">
+            <div class="card-header bg-dark text-white">
+                {{#if editMode}}Edicion{{else}}Creacion{{/if}} de Tipos
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{#if editMode}}/Tipos/edit-tipo{{else}}/Tipos/create-tipo{{/if}}">
+                    <div class="mb-3 label">
+                        <label for="name" class="form-label text-white">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="Name"
+                            value="{{#if editMode}}{{tipo.name}}{{/if}}" required/>
+                    </div>
+
+                    {{#if editMode}}
+
+                    <input type="hidden" name="Id" value="{{tipo.id}}">
+
+                    {{/if}}
+                    <a href="/Tipos" class="btn btn-danger">Atras</a>
+                    <button type="submit" class="btn btn-primary">{{#if editMode}}Editar{{else}}Crear{{/if}}</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
